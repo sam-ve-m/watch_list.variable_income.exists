@@ -1,0 +1,55 @@
+include:
+- ./func/*
+kind: ArchiveUploadSpec
+name: func-8bqK
+
+---
+apiVersion: fission.io/v1
+kind: Package
+metadata:
+  creationTimestamp: null
+  name: watch-list-exists-fn-44219c46-f031-485a-9433-6ac877d0c2e5
+  namespace: default
+spec:
+  deployment:
+    checksum: {}
+  environment:
+    name: watch-list-exists-env
+    namespace: default
+  source:
+    checksum: {}
+    type: url
+    url: archive://func-8bqK
+status:
+  buildstatus: pending
+  lastUpdateTimestamp: "2022-06-14T17:07:27Z"
+
+---
+apiVersion: fission.io/v1
+kind: Function
+metadata:
+  creationTimestamp: null
+  name: watch-list-exists-fn
+  namespace: default
+spec:
+  InvokeStrategy:
+    ExecutionStrategy:
+      ExecutorType: poolmgr
+      MaxScale: 0
+      MinScale: 0
+      SpecializationTimeout: 120
+      TargetCPUPercent: 0
+    StrategyType: execution
+  concurrency: 500
+  environment:
+    name: watch-list-exists-env
+    namespace: default
+  functionTimeout: 60
+  idletimeout: 120
+  package:
+    functionName: main.symbol_exists
+    packageref:
+      name: watch-list-exists-fn-44219c46-f031-485a-9433-6ac877d0c2e5
+      namespace: default
+  requestsPerPod: 100000
+  resources: {}
