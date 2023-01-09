@@ -1,8 +1,8 @@
 from decouple import config
 from etria_logger import Gladsheim
 
-from src.domain.watch_list.model import WatchListSymbolModel
-from src.infrastructures.mongo_db.infrastructure import MongoDBInfrastructure
+from func.src.domain.watch_list.model import WatchListSymbolModel
+from func.src.infrastructures.mongo_db.infrastructure import MongoDBInfrastructure
 
 
 class WatchListRepository:
