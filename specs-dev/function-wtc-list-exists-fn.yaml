@@ -1,55 +1,61 @@
 include:
-- ./func/*
+- fission.py
 kind: ArchiveUploadSpec
-name: func-8bqK
+name: fission-py-p958
 
 ---
 apiVersion: fission.io/v1
 kind: Package
 metadata:
   creationTimestamp: null
-  name: watch-list-exists-fn-44219c46-f031-485a-9433-6ac877d0c2e5
+  name: wtc-list-exists-fn-86643154-6912-4ebd-b352-ce905d44301c
   namespace: default
 spec:
   deployment:
     checksum: {}
+    type: url
+    url: archive://fission-py-p958
   environment:
-    name: watch-list-exists-env
+    name: wtc-list-exists-env
     namespace: default
   source:
     checksum: {}
-    type: url
-    url: archive://func-8bqK
 status:
-  buildstatus: pending
-  lastUpdateTimestamp: "2022-06-14T17:07:27Z"
+  buildstatus: none
+  lastUpdateTimestamp: "2023-01-09T17:36:42Z"
 
 ---
 apiVersion: fission.io/v1
 kind: Function
 metadata:
   creationTimestamp: null
-  name: watch-list-exists-fn
+  name: wtc-list-exists-fn
   namespace: default
 spec:
   InvokeStrategy:
     ExecutionStrategy:
       ExecutorType: newdeploy
-      MaxScale: 6
+      MaxScale: 3
       MinScale: 1
       SpecializationTimeout: 120
-      TargetCPUPercent: 80
+      TargetCPUPercent: 0
+      hpaMetrics:
+      - resource:
+          name: cpu
+          target:
+            averageUtilization: 80
+            type: Utilization
+        type: Resource
     StrategyType: execution
   concurrency: 500
   environment:
-    name: watch-list-exists-env
+    name: wtc-list-exists-env
     namespace: default
   functionTimeout: 60
   idletimeout: 120
   package:
-    functionName: main.symbol_exists
     packageref:
-      name: watch-list-exists-fn-44219c46-f031-485a-9433-6ac877d0c2e5
+      name: wtc-list-exists-fn-86643154-6912-4ebd-b352-ce905d44301c
       namespace: default
-  requestsPerPod: 100000
+  requestsPerPod: 10000
   resources: {}

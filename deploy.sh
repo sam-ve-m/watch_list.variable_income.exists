@@ -1,5 +1,4 @@
-#!/bin/bash
 fission spec init
-fission env create --spec --name watch-list-exists-env --image nexus.sigame.com.br/fission-async:0.1.6 --builder nexus.sigame.com.br/fission-builder-3.8:0.0.1
-fission fn create --spec --name watch-list-exists-fn --env watch-list-exists-env --src "./func/*" --entrypoint main.symbol_exists  --rpp 100000
-fission route create --spec --method GET --url /watch_list/exists --function watch-list-exists-fn
+fission env create --spec --name wtc-list-exists-env --image nexus.sigame.com.br/fission-wacth-list-exists:0.1.0-0 --poolsize 0 --version 3 --imagepullsecret "nexus-v3" --spec
+fission fn create --spec --name wtc-list-exists-fn --env wtc-list-exists-env --code fission.py --targetcpu 80 --executortype newdeploy --maxscale 3 --requestsperpod 10000 --spec
+fission route create --spec --name wtc-list-exists-rt --method GET --url /watch_list/exists --function wtc-list-exists-fn

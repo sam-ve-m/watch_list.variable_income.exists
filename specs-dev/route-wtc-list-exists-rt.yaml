@@ -2,13 +2,13 @@ apiVersion: fission.io/v1
 kind: HTTPTrigger
 metadata:
   creationTimestamp: null
-  name: 1e5b953f-3f65-4144-ae8a-257a9e21acc8
+  name: wtc-list-exists-rt
   namespace: default
 spec:
   createingress: false
   functionref:
     functionweights: null
-    name: watch-list-exists-fn
+    name: wtc-list-exists-fn
     type: name
   host: ""
   ingressconfig:
