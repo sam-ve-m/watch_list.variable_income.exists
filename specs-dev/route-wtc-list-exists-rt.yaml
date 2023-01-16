@@ -14,10 +14,10 @@ spec:
   ingressconfig:
     annotations: null
     host: '*'
-    path: /watch_list/exists
+    path: /watch_list/variable_income/exists
     tls: ""
   method: ""
   methods:
   - GET
   prefix: ""
-  relativeurl: /watch_list/exists
+  relativeurl: /watch_list/variable_income/exists
