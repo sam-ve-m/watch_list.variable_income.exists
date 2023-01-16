@@ -26,11 +26,10 @@ class WatchListRepository:
     @classmethod
     async def exists(cls, symbol: WatchListSymbolModel):
         collection = await cls.__get_collection()
-        query = None
+        id = symbol.get_id()
+        query = {"_id": id}
 
         try:
-            id = symbol.get_id()
-            query = {"_id": id}
             exists = bool(await collection.find_one(query))
             return exists
 
