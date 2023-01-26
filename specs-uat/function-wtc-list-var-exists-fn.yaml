@@ -1,0 +1,57 @@
+include:
+- fission.py
+kind: ArchiveUploadSpec
+name: fission-py-R8cp
+
+---
+apiVersion: fission.io/v1
+kind: Package
+metadata:
+  creationTimestamp: null
+  name: wtc-list-var-exists-fn-46737ce3-2eb6-4d76-a09d-9717fa8a032f
+  namespace: default
+spec:
+  deployment:
+    checksum: {}
+    type: url
+    url: archive://fission-py-R8cp
+  environment:
+    name: wtc-list-var-exists-env
+    namespace: default
+  source:
+    checksum: {}
+status:
+  buildstatus: none
+  lastUpdateTimestamp: "2023-01-16T12:02:54Z"
+
+---
+apiVersion: fission.io/v1
+kind: Function
+metadata:
+  creationTimestamp: null
+  name: wtc-list-var-exists-fn
+  namespace: default
+spec:
+  InvokeStrategy:
+    ExecutionStrategy:
+      ExecutorType: poolmgr
+      SpecializationTimeout: 120
+    StrategyType: execution
+  concurrency: 500
+  environment:
+    name: wtc-list-var-exists-env
+    namespace: default
+  functionTimeout: 60
+  idletimeout: 120
+  package:
+    packageref:
+      name: wtc-list-var-exists-fn-46737ce3-2eb6-4d76-a09d-9717fa8a032f
+      namespace: default
+  requestsPerPod: 10000
+  resources:
+    requests:
+      cpu: 128m
+      memory: 128Mi
+    limits:
+      cpu: 256m
+      memory: 256Mi
